@@ -124,7 +124,13 @@ def spaceman(secret_word):
         get_guessed_word(secret_word, letters_guessed)
         #TODO: check if the game has been won or lost
         is_word_guessed(secret_word, letters_guessed)
-
+        # ends game if player runs out of tries
+        if tries == 0:
+            print("You Lost! The secret word was", secret_word)
+            break
+    
+    if is_word_guessed(secret_word, letters_guessed) == True:
+        print("You win! YAYYYAYAYYAYAYY")
 
 #These function calls that will start the game
 
