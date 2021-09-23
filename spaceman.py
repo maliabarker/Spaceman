@@ -1,4 +1,5 @@
 import random
+letters_guessed = []
 
 def load_word():
     '''
@@ -28,6 +29,12 @@ def is_word_guessed(secret_word, letters_guessed):
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
+    for letters in secret_word:
+        if letters not in letters_guessed:
+            return False
+        else:
+            return True
+
     pass
 
 def get_guessed_word(secret_word, letters_guessed):
@@ -43,14 +50,19 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
 
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
-
+    for letters in secret_word:
+        for letter in letters_guessed:
+            if letter in letters:
+                print(letter)
+            else:
+                print('_')
     pass
 
 
 def is_guess_in_word(guess, secret_word):
     '''
     A function to check if the guessed letter is in the secret word
-
+    
     Args:
         guess (string): The letter the player guessed this round
         secret_word (string): The secret word
@@ -60,6 +72,14 @@ def is_guess_in_word(guess, secret_word):
 
     '''
     #TODO: check if the letter guess is in the secret word
+    tries = 7
+    if guess in secret_word:
+        print('Good job! You guessed correctly!')
+        return True
+    else:
+        tries -= 1
+        print(f"Uh oh, that's incorrect! You have", tries, "tries left. Guess again.")
+        return False
 
     pass
 
@@ -77,15 +97,33 @@ def spaceman(secret_word):
 
 
     #TODO: show the player information about the game according to the project spec
+    print('Welcome to spaceman!')
+    print('Spaceman is a guessing game. There is a mystery word which you try to guess one letter at a time.')
+    print('A placeholder is initially shown, with the number of blanks corresponding to the number of letters in the word.')
+    print('If the letter is in the mystery word, the position(s) of the letter(s) are revealed in the placeholders.')
+    print('The spaceman is made up of seven parts, and each part is drawn for each incorrect guess.')
+    print('If all seven parts get drawn before you guess the word, then you lose.')
+    print('Guess the word before you run out of guesses!')
+    print("Let's start!")
 
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
+    print(secret_word)
+    # while is_word_guessed(secret_word, letters_guessed) == False:
+
+    guess = input('Please enter a letter > ')
+
+    if len(guess) == 1:
+        letters_guessed.append(guess)
+        print(letters_guessed)
+    else:
+        print('Please enter only one letter at a time')
 
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
-
+    is_guess_in_word(guess, secret_word)
     #TODO: show the guessed word so far
-
+    get_guessed_word(secret_word, letters_guessed)
     #TODO: check if the game has been won or lost
-
+    is_word_guessed(secret_word, letters_guessed)
 
 
 
