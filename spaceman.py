@@ -204,14 +204,18 @@ def spaceman(secret_word):
         guess = input('Please enter a letter > ')
 
         if len(guess) == 1:
-            if str(guess) not in letters_guessed:
+            guess = guess.lower()
+            if guess.isnumeric() == True:
+                print("WHAT? That's not a letter!")
+                tries += 1
+            elif str(guess) not in letters_guessed:
                 letters_guessed.append(guess)
             else: 
                 tries += 1
                 print("Oops! You've already guessed that letter!")
             # print(letters_guessed)
         else:
-            print('Please enter only one letter at a time')
+            print('Please enter only one character at a time')
 
         #TODO: Check if the guessed letter is in the secret or not and give the player feedback
         is_guess_in_word(guess, secret_word)
@@ -221,6 +225,7 @@ def spaceman(secret_word):
         is_word_guessed(secret_word, letters_guessed)
         #TODO: print spaceman ASCII art
         display_spaceman(tries)
+
         # ends game if player runs out of tries
         if tries == 0:
             print("You Lost! The secret word was", secret_word)
@@ -242,4 +247,6 @@ spaceman(secret_word)
 # test = is_guess_in_word('f, d, g', 'abc')
 # print(test)
 
-
+# guess = input("guess > ")
+# if guess.isnumeric() == True:
+#     print("beep")
